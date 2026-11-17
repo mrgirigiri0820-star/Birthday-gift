@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #100016;
+  color: white;
+  font-family: Georgia, serif;
+  text-align: center;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+h1 {
+  color: #ff72b6;
+  font-size: clamp(30px, 8vw, 48px);
+  text-shadow: 0 0 20px #ff1493;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  to { text-shadow: 0 0 35px #ff1493; }
+}
+
+p {
+  font-size: 18px;
+  margin: 20px;
+  line-height: 1.6;
+}
+
+button {
+  padding: 14px 28px;
+  background: #ff4f9a;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff4f9a;
+  margin-top: 20px;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+#stage2, #stage3, #stage4 {
+  display: none;
+}
+
+.gift {
+  font-size: 100px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  50% { transform: translateY(-20px); }
+}
+
+.balloon {
+  position: fixed;
+  bottom: -120px;
+  font-size: 45px;
+  animation: float 6s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-120vh) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+.cake {
+  font-size: 100px;
+  animation: cakeIn 1.5s ease;
+}
+
+@keyframes cakeIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.heart {
+  font-size: 55px;
+  animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+  50% { transform: scale(1.3); }
+}
+
+.message {
+  color: #ffb6d9;
+  font-size: 21px;
+  max-width: 500px;
+}
+</style>
+</head>
+
+<body>
+
+<section class="page" id="stage1">
+  <h1>Hey, My Special Person ❤️</h1>
+  <p>I have a little surprise for you...</p>
+  <button onclick="nextStage(2)">
+    Open Your Surprise 💌
+  </button>
+</section>
+
+<section class="page" id="stage2">
+  <div class="gift">🎁</div>
+  <h1>A Gift For You!</h1>
+  <p>Because you deserve something beautiful.</p>
+  <button onclick="nextStage(3)">
+    Open the Gift ✨
+  </button>
+</section>
+
+<section class="page" id="stage3">
+  <h1>Happy Birthday! 🎉</h1>
+  <div class="cake">🎂</div>
+  <p>May your life always be filled with happiness!</p>
+  <button onclick="nextStage(4)">
+    One Last Surprise ❤️
+  </button>
+</section>
+
+<section class="page" id="stage4">
+  <div class="heart">❤️</div>
+  <h1>Happy Birthday, My Love!</h1>
+
+  <p class="message">
+    You are a beautiful part of my world.
+    May all your dreams come true.
+    Keep smiling, keep shining,
+    and always be happy.
+
+    You deserve all the happiness
+    in this universe. ❤️
+
+    <br><br>
+    Forever special to me! 🌹
+  </p>
+</section>
+
+<script>
+function nextStage(number) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.style.display = "none";
+  });
+
+  document.getElementById("stage" + number)
+    .style.display = "flex";
+
+  if (number >= 3) {
+    createBalloons();
+  }
+}
+
+function createBalloons() {
+  const emojis = ["🎈", "💗", "🎈", "✨", "❤️"];
+
+  for (let i = 0; i < 18; i++) {
+    const balloon = document.createElement("div");
+
+    balloon.className = "balloon";
+    balloon.innerHTML =
+      emojis[Math.floor(Math.random() * emojis.length)];
+
+    balloon.style.left = Math.random() * 100 + "vw";
+    balloon.style.animationDelay = Math.random() * 3 + "s";
+
+    document.body.appendChild(balloon);
+
+    setTimeout(() => balloon.remove(), 10000);
+  }
+}
+</script>
+
+</body>
+</html>
